@@ -41,4 +41,10 @@
     </div>
     @endforeach
 </div>
+
+<!-- Linki do paginacji -->
+<div class="d-flex justify-content-center mt-4">
+    {{ $movies->links() }}
+</div>
+
 @endsection

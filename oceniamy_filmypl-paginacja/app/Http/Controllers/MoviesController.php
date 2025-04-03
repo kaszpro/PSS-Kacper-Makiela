@@ -14,15 +14,13 @@ class MoviesController extends Controller
             return redirect()->route('login')->with('error', 'Musisz się zalogować, aby zobaczyć filmy!');
         }
 
-        
         $search = $request->input('search');
 
-        
         $movies = Movie::withAvg('reviews', 'rating')
             ->when($search, function ($query, $search) {
                 return $query->where('title', 'like', '%' . $search . '%');
             })
-            ->get();
+            ->paginate(10); // Poprawiono stronnicowanie
 
         return view('movies.index', compact('movies'));
     }
